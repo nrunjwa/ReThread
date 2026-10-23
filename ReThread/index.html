@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReThread – Township textile tracking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600;1,6..72,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #fbf9f4;
+      --bg-banner: #f8edd9;
+      --text-banner: #78644c;
+      --primary-green: #1d4d38;
+      --accent-green-tag: #a5e2c7;
+      --accent-green-text: #176043;
+      --text-dark: #1f2a24;
+      --text-muted: #57655d;
+      --border-card: #e5e8e5;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    /* Top Notice Banner */
+    .top-banner {
+      background-color: var(--bg-banner);
+      color: var(--text-banner);
+      font-size: 0.78rem;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    /* Navigation Bar */
+    header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-logo svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .brand-logo span {
+      font-family: 'Newsreader', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--primary-green);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-signin {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border-color: #e2e4e2;
+    }
+
+    .btn-signin:hover {
+      background-color: #f3f5f3;
+    }
+
+    .btn-register {
+      background-color: var(--primary-green);
+      color: var(--white);
+    }
+
+    .btn-register:hover {
+      background-color: #163d2c;
+    }
+
+    /* Hero Section */
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      background-color: var(--accent-green-tag);
+      color: var(--accent-green-text);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Newsreader', serif;
+      font-size: 3.8rem;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--primary-green);
+      font-weight: 600;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary-action {
+      background-color: var(--primary-green);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    .btn-primary-action:hover {
+      background-color: #163d2c;
+    }
+
+    .btn-outline-action {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border-color: #e2e4e2;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    .btn-outline-action:hover {
+      background-color: #f3f5f3;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 28px;
+      display: block;
+    }
+
+    /* How It Works Section */
+    .how-it-works-section {
+      background-color: var(--white);
+      padding: 60px 32px 80px;
+      border-top: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .how-it-works-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 36px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step-card {
+      background-color: var(--white);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .step-icon {
+      color: var(--primary-green);
+      margin-bottom: 24px;
+      display: inline-flex;
+    }
+
+    .step-number {
+      font-size: 0.8rem;
+      color: #88938d;
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--bg-cream);
+      text-align: center;
+      padding: 40px 16px;
+      font-size: 0.85rem;
+      color: #7b8881;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+      }
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <a href="#" class="brand-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#25a16d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+      </svg>
+      <span>ReThread</span>
+    </a>
+
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-container">
+    <div class="hero-content">
+      <span class="badge-tag">Township textile tracking</span>
+      <h1 class="hero-title">Give clothes a <em>next life.</em></h1>
+      <p class="hero-description">
+        Find the right collection point, hand over your unwanted clothes, and follow them all the way to a verified reuse or recycling outcome.
+      </p>
+      <div class="hero-actions">
+        <a href="donor/donor_login.php" class="btn btn-primary-action">Start donating</a>
+        <a href="organisation/org_login.php" class="btn btn-outline-action">I'm an organisation</a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <img 
+        src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80" 
+        alt="Folded clothes in a wicker basket" 
+      />
+    </div>
+  </main>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section">
+    <div class="how-it-works-container">
+      <h2 class="section-title">How it works</h2>
+      <div class="steps-grid">
+        
+        <!-- Step 1 -->
+        <article class="step-card">
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+            </svg>
+          </div>
+          <span class="step-number">Step 1</span>
+          <h3 class="step-title">Submit</h3>
+          <p class="step-desc">Tell us the material, weight and condition.</p>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="step-card">
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span class="step-number">Step 2</span>
+          <h3 class="step-title">Match</h3>
+          <p class="step-desc">Choose a nearby collection point with space.</p>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="step-card">
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.29 7 12 12 20.71 7"/>
+              <line x1="12" y1="22" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <span class="step-number">Step 3</span>
+          <h3 class="step-title">Verify</h3>
+          <p class="step-desc">The organisation weighs and confirms receipt.</p>
+        </article>
+
+        <!-- Step 4 -->
+        <article class="step-card">
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+              <path d="M11 19h8.2a1.8 1.8 0 0 0 1.56-.88 1.78 1.78 0 0 0-.01-1.78l-3.95-6.84"/>
+              <path d="M8 5h8.2a1.8 1.8 0 0 1 1.56.88 1.78 1.78 0 0 1-.01 1.78l-1.95 3.34"/>
+              <polyline points="14 16 11 19 14 22"/>
+              <polyline points="8 2 11 5 8 8"/>
+            </svg>
+          </div>
+          <span class="step-number">Step 4</span>
+          <h3 class="step-title">Next life</h3>
+          <p class="step-desc">See exactly how much was reused or recycled.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 ReThread
+  </footer>
+
+</body>
+</html>
