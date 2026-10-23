@@ -1,0 +1,21 @@
+# Files and folders Git should NOT track.
+# Rename this file to .gitignore (see the lab sheet).
+
+# Secrets: never commit these
+.env
+*.key
+*.pem
+secrets.*
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
